@@ -1,6 +1,7 @@
 package nanogenius;
 
 import javax.microedition.lcdui.*;
+import java.util.Random;
 
 public class NanoGenius extends Canvas implements CommandListener {
 
@@ -8,6 +9,8 @@ public class NanoGenius extends Canvas implements CommandListener {
     private Command cmdSair;
     private Command cmdLoop;
     private int largura, altura, percBorda, curBlock;
+
+    public static Random random = new Random();
 
     public NanoGenius(Main midlet) {
         largura = getWidth();
@@ -30,6 +33,12 @@ public class NanoGenius extends Canvas implements CommandListener {
 
         g.setColor(Cor.PRETO);
         g.fillArc(0, 0, largura, largura, 0, 360);
+
+        if ( curBlock == 1 ) Escala.tocaNota(Escala.cNat);
+        if ( curBlock == 2 ) Escala.tocaNota(Escala.dNat);
+        if ( curBlock == 3 ) Escala.tocaNota(Escala.eNat);
+        if ( curBlock == 4 ) Escala.tocaNota(Escala.fNat);
+        if ( curBlock == 5 ) Escala.tocaNota(Escala.gNat);
 
         g.setColor(curBlock == 1 ? Cor.VERDE : Cor.VERDE_ESCURO);
         g.fillArc(0, 0, largura - percBorda, largura - percBorda, 90, 90);
@@ -63,37 +72,12 @@ public class NanoGenius extends Canvas implements CommandListener {
         }
         if (c == cmdLoop) {
             try {
-                curBlock = 1;
-                repaint();
-                serviceRepaints();
-                Escala.tocaNota(Escala.aNat);
-                Thread.sleep(500);
-
-                curBlock = 4;
-                repaint();
-                serviceRepaints();
-                Thread.sleep(500);
-
-                curBlock = 2;
-                repaint();
-                serviceRepaints();
-                Thread.sleep(500);
-
-                curBlock = 3;
-                repaint();
-                serviceRepaints();
-                Thread.sleep(500);
-
-                curBlock = 1;
-                repaint();
-                serviceRepaints();
-                Thread.sleep(500);
-
-                curBlock = 5;
-                repaint();
-                serviceRepaints();
-                Thread.sleep(500);
-
+                for ( int i=0;i<5;i++) {
+                  curBlock = random.nextInt(5) + 1;
+                  repaint();
+                  serviceRepaints();
+                  Thread.sleep(500);
+                }
                 curBlock = 0;
                 repaint();
                 serviceRepaints();
