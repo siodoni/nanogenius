@@ -212,8 +212,8 @@
      showgrid="false"
      inkscape:window-width="1024"
      inkscape:window-height="721"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4" />
+     inkscape:window-x="0"
+     inkscape:window-y="20" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -229,15 +229,6 @@
      inkscape:label="Camada 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <path
-       sodipodi:type="arc"
-       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path2383"
-       sodipodi:cx="293.95438"
-       sodipodi:cy="534.64923"
-       sodipodi:rx="128.28937"
-       sodipodi:ry="207.57657"
-       d="M 422.24374,534.64923 A 128.28937,207.57657 0 1 1 422.24374,534.64923 A 128.28937,207.57657 0 1 1 422.24374,534.64923 z" />
     <path
        sodipodi:type="arc"
        style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
