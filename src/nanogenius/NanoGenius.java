@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class NanoGenius extends Canvas implements CommandListener {
 
-    private Main chart;
+    private Main game;
     private Command cmdSair;
     private Command cmdLoop;
     private int largura, altura, percBorda, curBlock;
@@ -16,9 +16,10 @@ public class NanoGenius extends Canvas implements CommandListener {
         altura = getHeight();
         percBorda = (getWidth() * 10) / 100;
         curBlock = 0;
+        Escala.oitava = 12;
 
         //setFullScreenMode(true);
-        this.chart = midlet;
+        this.game = midlet;
         cmdSair = new Command("Sair", Command.EXIT, 0);
         addCommand(cmdSair);
         cmdLoop = new Command("Samplear", Command.ITEM, 0);
@@ -37,16 +38,16 @@ public class NanoGenius extends Canvas implements CommandListener {
             Escala.tocaNota(Escala.cNat);
         }
         if (curBlock == 2) {
-            Escala.tocaNota(Escala.dNat);
-        }
-        if (curBlock == 3) {
             Escala.tocaNota(Escala.eNat);
         }
-        if (curBlock == 4) {
+        if (curBlock == 3) {
             Escala.tocaNota(Escala.fNat);
         }
-        if (curBlock == 5) {
+        if (curBlock == 4) {
             Escala.tocaNota(Escala.gNat);
+        }
+        if (curBlock == 5) {
+            Escala.tocaNota(Escala.aNat);
         }
 
         g.setColor(curBlock == 1 ? Cor.VERDE : Cor.VERDE_ESCURO);
@@ -69,31 +70,61 @@ public class NanoGenius extends Canvas implements CommandListener {
     }
 
     protected void keyPressed(int keyCode) {
-        if (keyCode == KEY_NUM0) {
+        int tecla = getGameAction(keyCode);
+
+        if (keyCode == KEY_NUM1) {
             curBlock = 1;
             repaint();
+            serviceRepaints();
+        }
+        if (keyCode == KEY_NUM3) {
+            curBlock = 2;
+            repaint();
+            serviceRepaints();
+        }
+        if (keyCode == KEY_NUM5) {
+            curBlock = 5;
+            repaint();
+            serviceRepaints();
+        }
+        if (keyCode == KEY_NUM7) {
+            curBlock = 3;
+            repaint();
+            serviceRepaints();
+        }
+        if (keyCode == KEY_NUM9) {
+            curBlock = 4;
+            repaint();
+            serviceRepaints();
+        }
+        if (tecla == Canvas.FIRE) {
+            jogar();
         }
     }
 
     public void commandAction(Command c, Displayable d) {
         if (c == cmdSair) {
-            chart.destroyApp(false);
+            game.destroyApp(false);
         }
         if (c == cmdLoop) {
-            try {
-                for (int i = 0; i < 5; i++) {
-                    curBlock = random.nextInt(5) + 1;
-                    repaint();
-                    serviceRepaints();
-                    Thread.sleep(500);
-                    curBlock = 0;
-                    repaint();
-                    serviceRepaints();
-                    Thread.sleep(100);
-                }
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
+            jogar();
+        }
+    }
+
+    private void jogar() {
+        try {
+            for (int i = 0; i < 5; i++) {
+                curBlock = random.nextInt(5) + 1;
+                repaint();
+                serviceRepaints();
+                Thread.sleep(500);
+                curBlock = 0;
+                repaint();
+                serviceRepaints();
+                Thread.sleep(50);
             }
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
     }
 }

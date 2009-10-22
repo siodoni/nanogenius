@@ -6,10 +6,8 @@ import javax.microedition.midlet.MIDlet;
 public class Main extends MIDlet {
 
     private Canvas canvas;
-    private Form form;
 
     public Main() {
-        //canvas = new PieChart(this);
         canvas = new NanoGenius(this);
     }
 
