@@ -9,7 +9,6 @@ public class NanoGenius extends Canvas implements CommandListener {
     private Command cmdSair;
     private Command cmdLoop;
     private int largura, altura, percBorda, curBlock;
-
     public static Random random = new Random();
 
     public NanoGenius(Main midlet) {
@@ -34,11 +33,21 @@ public class NanoGenius extends Canvas implements CommandListener {
         g.setColor(Cor.PRETO);
         g.fillArc(0, 0, largura, largura, 0, 360);
 
-        if ( curBlock == 1 ) Escala.tocaNota(Escala.cNat);
-        if ( curBlock == 2 ) Escala.tocaNota(Escala.dNat);
-        if ( curBlock == 3 ) Escala.tocaNota(Escala.eNat);
-        if ( curBlock == 4 ) Escala.tocaNota(Escala.fNat);
-        if ( curBlock == 5 ) Escala.tocaNota(Escala.gNat);
+        if (curBlock == 1) {
+            Escala.tocaNota(Escala.cNat);
+        }
+        if (curBlock == 2) {
+            Escala.tocaNota(Escala.dNat);
+        }
+        if (curBlock == 3) {
+            Escala.tocaNota(Escala.eNat);
+        }
+        if (curBlock == 4) {
+            Escala.tocaNota(Escala.fNat);
+        }
+        if (curBlock == 5) {
+            Escala.tocaNota(Escala.gNat);
+        }
 
         g.setColor(curBlock == 1 ? Cor.VERDE : Cor.VERDE_ESCURO);
         g.fillArc(0, 0, largura - percBorda, largura - percBorda, 90, 90);
@@ -72,15 +81,16 @@ public class NanoGenius extends Canvas implements CommandListener {
         }
         if (c == cmdLoop) {
             try {
-                for ( int i=0;i<5;i++) {
-                  curBlock = random.nextInt(5) + 1;
-                  repaint();
-                  serviceRepaints();
-                  Thread.sleep(500);
+                for (int i = 0; i < 5; i++) {
+                    curBlock = random.nextInt(5) + 1;
+                    repaint();
+                    serviceRepaints();
+                    Thread.sleep(500);
+                    curBlock = 0;
+                    repaint();
+                    serviceRepaints();
+                    Thread.sleep(100);
                 }
-                curBlock = 0;
-                repaint();
-                serviceRepaints();
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
