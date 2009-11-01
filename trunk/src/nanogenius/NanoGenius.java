@@ -8,7 +8,8 @@ public class NanoGenius extends Canvas implements CommandListener {
     private Main game;
     private Command cmdSair;
     private Command cmdLoop;
-    private int largura, altura, percBorda, curBlock;
+    private int largura, altura, percBorda, curBlock, curLayout = 0, curSample=0, emJogo=0;
+    private StringBuffer sequencia = new StringBuffer();
     public static Random random = new Random();
 
     public NanoGenius(Main midlet) {
@@ -69,36 +70,65 @@ public class NanoGenius extends Canvas implements CommandListener {
         g.fillArc(largura / 3, largura / 3, largura / 3, largura / 3, 0, 360);
     }
 
+    protected void pausa(int tempo) {
+            try {
+                Thread.sleep(tempo);
+            } catch (InterruptedException ex) {}
+    }
+
+    protected void piscaBloco(int bloco, int tempo) {
+            curBlock=bloco;
+            repaint();
+            serviceRepaints();
+            pausa(tempo);
+            curBlock = 0;
+            repaint();
+            serviceRepaints();
+    }
+
     protected void keyPressed(int keyCode) {
+
         int tecla = getGameAction(keyCode);
 
-        if (keyCode == KEY_NUM1) {
-            curBlock = 1;
-            repaint();
-            serviceRepaints();
-        }
-        if (keyCode == KEY_NUM3) {
-            curBlock = 2;
-            repaint();
-            serviceRepaints();
-        }
-        if (keyCode == KEY_NUM5) {
-            curBlock = 5;
-            repaint();
-            serviceRepaints();
-        }
-        if (keyCode == KEY_NUM7) {
-            curBlock = 3;
-            repaint();
-            serviceRepaints();
-        }
-        if (keyCode == KEY_NUM9) {
-            curBlock = 4;
-            repaint();
-            serviceRepaints();
-        }
-        if (tecla == Canvas.FIRE) {
-            jogar();
+        if ( emJogo == 0 ) {
+            if (keyCode == KEY_NUM1) {
+                piscaBloco(1, 600);
+            }
+            if (keyCode == KEY_NUM3) {
+                piscaBloco(2, 600);
+            }
+            if (keyCode == KEY_NUM5) {
+                piscaBloco(5, 600);
+            }
+            if (keyCode == KEY_NUM7) {
+                piscaBloco(3, 600);
+            }
+            if (keyCode == KEY_NUM9) {
+                piscaBloco(4, 600);
+            }
+
+            if (tecla == Canvas.FIRE) {
+                novoJogo();
+            }
+    
+            if ( sequencia.length() > 0 ) {
+                if ( ( ( keyCode == KEY_NUM1 ) && (sequencia.charAt(curSample) == 49 ) )
+                  || ( ( keyCode == KEY_NUM3 ) && (sequencia.charAt(curSample) == 50 ) )
+                  || ( ( keyCode == KEY_NUM5 ) && (sequencia.charAt(curSample) == 53 ) )
+                  || ( ( keyCode == KEY_NUM7 ) && (sequencia.charAt(curSample) == 51 ) )
+                  || ( ( keyCode == KEY_NUM9 ) && (sequencia.charAt(curSample) == 52 ) ) ) {
+                  curSample++;
+                  if ( curSample == sequencia.length() ) {
+                      jogar();
+                  }
+                } else {
+                    for( int i=0; i<2; i++ ) {
+                        for( int x=1; x<6; x++ ) piscaBloco(x,250);
+                    }
+                    pausa(2000);
+                    novoJogo();
+                }
+            }
         }
     }
 
@@ -107,24 +137,23 @@ public class NanoGenius extends Canvas implements CommandListener {
             game.destroyApp(false);
         }
         if (c == cmdLoop) {
-            jogar();
+            novoJogo();
         }
     }
 
+    private void novoJogo() {
+        sequencia=new StringBuffer();
+        jogar();
+    }
+
     private void jogar() {
-        try {
-            for (int i = 0; i < 5; i++) {
-                curBlock = random.nextInt(5) + 1;
-                repaint();
-                serviceRepaints();
-                Thread.sleep(500);
-                curBlock = 0;
-                repaint();
-                serviceRepaints();
-                Thread.sleep(50);
-            }
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
+        emJogo=1;
+
+        sequencia.append(random.nextInt(5) + 1);
+        for (int i = 0; i < sequencia.length(); i++) {
+          piscaBloco(sequencia.charAt(i)-48, 1000);
         }
+        emJogo=0;
+        curSample=0;
     }
 }
