@@ -18,7 +18,7 @@ public class NanoGenius extends Canvas implements CommandListener {
         altura = getHeight();
         percBorda = (getWidth() * 10) / 100;
         curBlock = 0;
-        Escala.oitava = 24;
+        Escala.oitava = 36;
 
         //setFullScreenMode(true);
         this.game = midlet;
