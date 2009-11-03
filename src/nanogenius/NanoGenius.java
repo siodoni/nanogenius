@@ -8,22 +8,22 @@ public class NanoGenius extends Canvas implements CommandListener {
     private Main game;
     private Command cmdSair;
     private Command cmdLoop;
-    private int largura, altura, percBorda, curBlock, curLayout = 0, curSample=0, emJogo=0;
+    private int largura, altura, percBorda, curBlock, curLayout = 0, curSample = 0, emJogo = 0;
     private StringBuffer sequencia = new StringBuffer();
-    public static Random random = new Random();
+    private static Random random = new Random();
 
     public NanoGenius(Main midlet) {
         largura = getWidth();
         altura = getHeight();
         percBorda = (getWidth() * 10) / 100;
         curBlock = 0;
-        Escala.oitava = 12;
+        Escala.oitava = 24;
 
         //setFullScreenMode(true);
         this.game = midlet;
         cmdSair = new Command("Sair", Command.EXIT, 0);
         addCommand(cmdSair);
-        cmdLoop = new Command("Samplear", Command.ITEM, 0);
+        cmdLoop = new Command("Novo", Command.ITEM, 0);
         addCommand(cmdLoop);
         setCommandListener(this);
     }
@@ -71,26 +71,27 @@ public class NanoGenius extends Canvas implements CommandListener {
     }
 
     protected void pausa(int tempo) {
-            try {
-                Thread.sleep(tempo);
-            } catch (InterruptedException ex) {}
+        try {
+            Thread.sleep(tempo);
+        } catch (InterruptedException ex) {
+        }
     }
 
     protected void piscaBloco(int bloco, int tempo) {
-            curBlock=bloco;
-            repaint();
-            serviceRepaints();
-            pausa(tempo);
-            curBlock = 0;
-            repaint();
-            serviceRepaints();
+        curBlock = bloco;
+        repaint();
+        serviceRepaints();
+        pausa(tempo);
+        curBlock = 0;
+        repaint();
+        serviceRepaints();
     }
 
     protected void keyPressed(int keyCode) {
 
         int tecla = getGameAction(keyCode);
 
-        if ( emJogo == 0 ) {
+        if (emJogo == 0) {
             if (keyCode == KEY_NUM1) {
                 piscaBloco(1, 600);
             }
@@ -110,20 +111,24 @@ public class NanoGenius extends Canvas implements CommandListener {
             if (tecla == Canvas.FIRE) {
                 novoJogo();
             }
-    
-            if ( sequencia.length() > 0 ) {
-                if ( ( ( keyCode == KEY_NUM1 ) && (sequencia.charAt(curSample) == 49 ) )
-                  || ( ( keyCode == KEY_NUM3 ) && (sequencia.charAt(curSample) == 50 ) )
-                  || ( ( keyCode == KEY_NUM5 ) && (sequencia.charAt(curSample) == 53 ) )
-                  || ( ( keyCode == KEY_NUM7 ) && (sequencia.charAt(curSample) == 51 ) )
-                  || ( ( keyCode == KEY_NUM9 ) && (sequencia.charAt(curSample) == 52 ) ) ) {
-                  curSample++;
-                  if ( curSample == sequencia.length() ) {
-                      jogar();
-                  }
+
+            if (sequencia.length() > 0) {
+                if ( ((keyCode == KEY_NUM1) && (sequencia.charAt(curSample) == KEY_NUM1))
+                  || ((keyCode == KEY_NUM3) && (sequencia.charAt(curSample) == KEY_NUM2))
+                  || ((keyCode == KEY_NUM5) && (sequencia.charAt(curSample) == KEY_NUM5))
+                  || ((keyCode == KEY_NUM7) && (sequencia.charAt(curSample) == KEY_NUM3))
+                  || ((keyCode == KEY_NUM9) && (sequencia.charAt(curSample) == KEY_NUM4)))
+                {
+                    curSample++;
+                    if (curSample == sequencia.length()) {
+                        pausa(1000);
+                        jogar();
+                    }
                 } else {
-                    for( int i=0; i<2; i++ ) {
-                        for( int x=1; x<6; x++ ) piscaBloco(x,250);
+                    for (int i = 0; i < 3; i++) {
+                        for (int x = 1; x < 6; x++) {
+                            piscaBloco(x, 100);
+                        }
                     }
                     pausa(2000);
                     novoJogo();
@@ -142,18 +147,18 @@ public class NanoGenius extends Canvas implements CommandListener {
     }
 
     private void novoJogo() {
-        sequencia=new StringBuffer();
+        sequencia = new StringBuffer();
         jogar();
     }
 
     private void jogar() {
-        emJogo=1;
+        emJogo = 1;
 
         sequencia.append(random.nextInt(5) + 1);
         for (int i = 0; i < sequencia.length(); i++) {
-          piscaBloco(sequencia.charAt(i)-48, 1000);
+            piscaBloco(sequencia.charAt(i) - 48, 1000);
         }
-        emJogo=0;
-        curSample=0;
+        emJogo = 0;
+        curSample = 0;
     }
 }
