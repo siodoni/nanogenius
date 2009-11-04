@@ -121,11 +121,11 @@ public class NanoGenius extends Canvas implements CommandListener {
                 piscaBloco(4, 600);
             }
 
-            if (tecla == Canvas.FIRE) {
+            if ( (tecla == Canvas.FIRE) && ( keyCode != KEY_NUM5 ) ) {
                 novoJogo();
             } else {
 
-                if (sequencia.length() > 0) {
+                if ( ( sequencia.length() > 0) && ( tecla != Canvas.FIRE ) ) {
                     if (((keyCode == KEY_NUM1) && (sequencia.charAt(curSample) == KEY_NUM1)) //
                             || ((keyCode == KEY_NUM3) && (sequencia.charAt(curSample) == KEY_NUM2)) //
                             || ((keyCode == KEY_NUM5) && (sequencia.charAt(curSample) == KEY_NUM5)) //
