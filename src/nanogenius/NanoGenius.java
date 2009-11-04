@@ -133,10 +133,12 @@ public class NanoGenius extends Canvas implements CommandListener {
                             || ((keyCode == KEY_NUM9) && (sequencia.charAt(curSample) == KEY_NUM4))) {
                         curSample++;
                         if (curSample == sequencia.length()) {
+                            emJogo=1;
                             pausa(1000);
                             jogar();
                         }
                     } else {
+                        emJogo=1;
                         for (int i = 0; i < 3; i++) {
                             for (int x = 1; x < 6; x++) {
                                 piscaBloco(x, 100);
