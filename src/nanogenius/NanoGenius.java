@@ -102,7 +102,7 @@ public class NanoGenius extends Canvas implements CommandListener {
 
     protected void keyPressed(int keyCode) {
 
-        int tecla = getGameAction(keyCode);
+        //int tecla = getGameAction(keyCode);
 
         if (emJogo == 0) {
             if (keyCode == KEY_NUM1) {
@@ -121,32 +121,31 @@ public class NanoGenius extends Canvas implements CommandListener {
                 piscaBloco(4, 600);
             }
 
-            if ( (tecla == Canvas.FIRE) && ( keyCode != KEY_NUM5 ) ) {
-                novoJogo();
-            } else {
-
-                if ( ( sequencia.length() > 0) && ( tecla != Canvas.FIRE ) ) {
-                    if (((keyCode == KEY_NUM1) && (sequencia.charAt(curSample) == KEY_NUM1)) //
-                            || ((keyCode == KEY_NUM3) && (sequencia.charAt(curSample) == KEY_NUM2)) //
-                            || ((keyCode == KEY_NUM5) && (sequencia.charAt(curSample) == KEY_NUM5)) //
-                            || ((keyCode == KEY_NUM7) && (sequencia.charAt(curSample) == KEY_NUM3)) //
-                            || ((keyCode == KEY_NUM9) && (sequencia.charAt(curSample) == KEY_NUM4))) {
-                        curSample++;
-                        if (curSample == sequencia.length()) {
-                            emJogo=1;
-                            pausa(1000);
-                            jogar();
-                        }
-                    } else {
+            if ( sequencia.length() > 0 )  {
+                if (((keyCode == KEY_NUM1) && (sequencia.charAt(curSample) == KEY_NUM1)) //
+                        || ((keyCode == KEY_NUM3) && (sequencia.charAt(curSample) == KEY_NUM2)) //
+                        || ((keyCode == KEY_NUM5) && (sequencia.charAt(curSample) == KEY_NUM5)) //
+                        || ((keyCode == KEY_NUM7) && (sequencia.charAt(curSample) == KEY_NUM3)) //
+                        || ((keyCode == KEY_NUM9) && (sequencia.charAt(curSample) == KEY_NUM4))) {
+                    curSample++;
+                    if (curSample == sequencia.length()) {
                         emJogo=1;
-                        for (int i = 0; i < 3; i++) {
-                            for (int x = 1; x < 6; x++) {
-                                piscaBloco(x, 100);
-                            }
-                        }
-                        pausa(2000);
-                        novoJogo();
+                        pausa(1000);
+                        jogar();
                     }
+                } else {
+                    emJogo=1;
+                    for (int i = 0; i < 2; i++) {
+                        for (int x = 1; x < 6; x++) {
+                            piscaBloco(x, 100);
+                        }
+                    }
+                    if ( sequencia.length() > 2 ) {
+                        Escala es = new Escala();
+                        es.tocaMusica("/fim.mp3");
+                    }
+                    pausa(2000);
+                    novoJogo();
                 }
             }
         }
