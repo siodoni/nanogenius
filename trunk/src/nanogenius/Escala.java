@@ -1,6 +1,9 @@
 package nanogenius;
 
+import java.io.InputStream;
 import javax.microedition.media.Manager;
+import javax.microedition.media.Player;
+import javax.microedition.media.control.VolumeControl;
 
 /**
  *
@@ -31,6 +34,23 @@ public class Escala {
             Manager.playTone(nota + oitava, 1, volume * 10);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void tocaMusica(String musica) {
+        try {
+            InputStream is = getClass().getResourceAsStream(musica);
+            Player player = Manager.createPlayer(is, "audio/mpeg");
+
+            player.realize();
+            // get volume control for player and set volume to max
+            VolumeControl vc = (VolumeControl) player.getControl("VolumeControl");
+            if (vc != null) {
+                vc.setLevel(100);
+            }
+            player.prefetch();
+            player.start();
+        } catch (Exception e) {
         }
     }
 }
