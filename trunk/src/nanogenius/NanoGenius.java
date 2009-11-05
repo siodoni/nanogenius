@@ -3,6 +3,11 @@ package nanogenius;
 import javax.microedition.lcdui.*;
 import java.util.Random;
 
+/**
+ * @author Flavio A. S. Ximenes
+ * @author Francisco A. Tristão
+ * @author Igor Mori Tristão
+ */
 public class NanoGenius extends Canvas implements CommandListener {
 
     private Main game;
@@ -18,7 +23,7 @@ public class NanoGenius extends Canvas implements CommandListener {
         larguraAlt = largura - percDesloc;
         percBorda = (largura * 10) / 100;
         curBlock = 0;
-        Escala.oitava = 36;
+        Musica.oitava = 36;
         //Escala.volume = 0;
 
         //setFullScreenMode(true);
@@ -49,19 +54,19 @@ public class NanoGenius extends Canvas implements CommandListener {
         }
 
         if (curBlock == 1) {
-            Escala.tocaNota(Escala.cNat);
+            Musica.tocaNota(Musica.cNat);
         }
         if (curBlock == 2) {
-            Escala.tocaNota(Escala.eNat);
+            Musica.tocaNota(Musica.eNat);
         }
         if (curBlock == 3) {
-            Escala.tocaNota(Escala.fNat);
+            Musica.tocaNota(Musica.fNat);
         }
         if (curBlock == 4) {
-            Escala.tocaNota(Escala.gNat);
+            Musica.tocaNota(Musica.gNat);
         }
         if (curBlock == 5) {
-            Escala.tocaNota(Escala.aNat);
+            Musica.tocaNota(Musica.aNat);
         }
 
         g.setColor(curBlock == 1 ? Cor.VERDE : Cor.VERDE_ESCURO);
@@ -121,7 +126,7 @@ public class NanoGenius extends Canvas implements CommandListener {
                 piscaBloco(4, 600);
             }
 
-            if ( sequencia.length() > 0 )  {
+            if (sequencia.length() > 0) {
                 if (((keyCode == KEY_NUM1) && (sequencia.charAt(curSample) == KEY_NUM1)) //
                         || ((keyCode == KEY_NUM3) && (sequencia.charAt(curSample) == KEY_NUM2)) //
                         || ((keyCode == KEY_NUM5) && (sequencia.charAt(curSample) == KEY_NUM5)) //
@@ -129,19 +134,19 @@ public class NanoGenius extends Canvas implements CommandListener {
                         || ((keyCode == KEY_NUM9) && (sequencia.charAt(curSample) == KEY_NUM4))) {
                     curSample++;
                     if (curSample == sequencia.length()) {
-                        emJogo=1;
+                        emJogo = 1;
                         pausa(1000);
                         jogar();
                     }
                 } else {
-                    emJogo=1;
+                    emJogo = 1;
                     for (int i = 0; i < 2; i++) {
                         for (int x = 1; x < 6; x++) {
                             piscaBloco(x, 100);
                         }
                     }
-                    if ( sequencia.length() > 2 ) {
-                        Escala es = new Escala();
+                    if (sequencia.length() > 2) {
+                        Musica es = new Musica();
                         es.tocaMusica("/fim.mp3");
                     }
                     pausa(2000);

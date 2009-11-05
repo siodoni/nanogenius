@@ -6,10 +6,11 @@ import javax.microedition.media.Player;
 import javax.microedition.media.control.VolumeControl;
 
 /**
- *
- * @author Flavio Augusto Siodoni Ximenes
+ * @author Flavio A. S. Ximenes
+ * @author Francisco A. Tristão
+ * @author Igor Mori Tristão
  */
-public class Escala {
+public class Musica {
 
     public static final int MAIOR_OITAVA = 48, MENOR_OITAVA = -24;
     public static int oitava = 0;
@@ -41,9 +42,7 @@ public class Escala {
         try {
             InputStream is = getClass().getResourceAsStream(musica);
             Player player = Manager.createPlayer(is, "audio/mpeg");
-
             player.realize();
-            // get volume control for player and set volume to max
             VolumeControl vc = (VolumeControl) player.getControl("VolumeControl");
             if (vc != null) {
                 vc.setLevel(100);

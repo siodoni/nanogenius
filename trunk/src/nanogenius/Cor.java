@@ -1,5 +1,10 @@
 package nanogenius;
 
+/**
+ * @author Flavio A. S. Ximenes
+ * @author Francisco A. Tristão
+ * @author Igor Mori Tristão
+ */
 public interface Cor {
 
     public static final int AMARELO = 0x00FFFF00;
