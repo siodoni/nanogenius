@@ -97,14 +97,14 @@ public class NanoGenius extends Canvas implements CommandListener {
         g.fillArc((larguraAlt / 3) + percDesloc / 2, (larguraAlt / 3) + percDesloc, larguraAlt / 3, larguraAlt / 3, 0, 360);
     }
 
-    protected void pausa(int tempo) {
+    private void pausa(int tempo) {
         try {
             Thread.currentThread().sleep(tempo);
         } catch (InterruptedException ex) {
         }
     }
 
-    protected void piscaBloco(int bloco, int tempo) {
+    private void piscaBloco(int bloco, int tempo) {
         curBlock = bloco;
         repaint();
         serviceRepaints();
@@ -114,7 +114,7 @@ public class NanoGenius extends Canvas implements CommandListener {
         serviceRepaints();
     }
 
-    protected void keyPressed(int keyCode) {
+    public void keyPressed(int keyCode) {
 
         //int tecla = getGameAction(keyCode);
 
@@ -135,23 +135,6 @@ public class NanoGenius extends Canvas implements CommandListener {
                 piscaBloco(4, 600);
             }
 
-<<<<<<< .mine
-            if ((tecla == Canvas.FIRE) && (keyCode != KEY_NUM5)) {
-                novoJogo();
-            } else {
-
-                if ((sequencia.length() > 0) && (tecla != Canvas.FIRE)) {
-                    if (((keyCode == KEY_NUM1) && (sequencia.charAt(curSample) == KEY_NUM1)) //
-                            || ((keyCode == KEY_NUM3) && (sequencia.charAt(curSample) == KEY_NUM2)) //
-                            || ((keyCode == KEY_NUM5) && (sequencia.charAt(curSample) == KEY_NUM5)) //
-                            || ((keyCode == KEY_NUM7) && (sequencia.charAt(curSample) == KEY_NUM3)) //
-                            || ((keyCode == KEY_NUM9) && (sequencia.charAt(curSample) == KEY_NUM4))) {
-                        curSample++;
-                        if (curSample == sequencia.length()) {
-                            emJogo = 1;
-                            pausa(1000);
-                            jogar();
-=======
             if (sequencia.length() > 0) {
                 if (((keyCode == KEY_NUM1) && (sequencia.charAt(curSample) == KEY_NUM1)) //
                         || ((keyCode == KEY_NUM3) && (sequencia.charAt(curSample) == KEY_NUM2)) //
@@ -169,21 +152,7 @@ public class NanoGenius extends Canvas implements CommandListener {
                     for (int i = 0; i < 2; i++) {
                         for (int x = 1; x < 6; x++) {
                             piscaBloco(x, 100);
->>>>>>> .r25
                         }
-<<<<<<< .mine
-                    } else {
-                        emJogo = 1;
-                        for (int i = 0; i < 3; i++) {
-                            for (int x = 1; x < 6; x++) {
-                                piscaBloco(x, 100);
-                                System.out.println("Erro....");
-                            }
-                        }
-                        pausa(2000);
-                        novoJogo();
-=======
->>>>>>> .r25
                     }
                     if (sequencia.length() > 2) {
                         Musica es = new Musica();
@@ -226,17 +195,17 @@ public class NanoGenius extends Canvas implements CommandListener {
         curSample = 0;
     }
 
-    public void montaSobre() {
+    private void montaSobre() {
         Runtime runtime = Runtime.getRuntime();
         sobre = new TextBox(
                 "Sobre",
                 game.getAppProperty("MIDlet-Name") + "\n\n" +
                 "Versão: " + game.getAppProperty("MIDlet-Version") + "\n\n" +
-                "Autores:\n" + game.getAppProperty("MIDlet-Vendor").replace('&', '\n') + "\n\n" +
+                "Autores:\n" + game.getAppProperty("MIDlet-Vendor").replace('-', '\n') + "\n\n" +
                 "Genius era um brinquedo muito popular na década de 80 " +
                 "e que buscava estimular a memorização de cores e sons. " +
-                "Com um formato semelhante a um OVNI, possuía botões coloridos " +
-                "que emitiam sons harmônicos e se iluminavam em seqüência. " +
+                "Com um formato semelhante a um OVNI, possuí-a botões coloridos " +
+                "que emitiam sons harmônicos e se iluminavam em sequência. " +
                 "Cabia aos jogadores repetir o processo sem errar (Wikipedia).\n\n" +
                 "Memória total: " + runtime.totalMemory() / 1024 + " kb" + "\n" +
                 "Memória livre: " + runtime.freeMemory() / 1024 + " kb",
@@ -247,13 +216,13 @@ public class NanoGenius extends Canvas implements CommandListener {
         sobre.setCommandListener(this);
     }
 
-    public void montaHelp() {
+    private void montaHelp() {
         help = new TextBox(
                 "Help",
                 "Para jogar utilize as teclas 1 (verde), " +
                 "3 (vermelho), 5 (roxo), 7 (amarelo) e 9 (azul).\n\n" +
-                "A cada sequencia correta o jogo irá acrescentar mais uma " +
-                "tecla na sequência.\n\nCaso o jogador erre o jogo é reiniciado " +
+                "A cada sequência correta o jogo irá acrescentar mais uma " +
+                "tecla na sequência.\n\nCaso o jogador erre o jogo será reiniciado " +
                 "automaticamente.",
                 500,
                 TextField.ANY | TextField.UNEDITABLE);
