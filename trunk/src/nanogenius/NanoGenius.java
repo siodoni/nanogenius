@@ -23,7 +23,7 @@ public class NanoGenius extends Canvas implements CommandListener {
         cmdSair = new Command("Sair", Command.EXIT, 0);
         cmdJogar = new Command("Novo", Command.ITEM, 0);
         cmdSobre = new Command("Sobre", Command.ITEM, 0);
-        cmdHelp = new Command("Help", Command.ITEM, 0);
+        cmdHelp = new Command("Ajuda", Command.HELP, 0);
         cmdVoltar = new Command("Voltar", Command.BACK, 0);
 
         altura = getHeight();
