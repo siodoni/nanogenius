@@ -51,17 +51,6 @@ public class NanoGenius extends Canvas implements CommandListener {
         g.setColor(Cor.PRETO);
         g.fillArc(percDesloc / 2, percDesloc, larguraAlt, larguraAlt, 0, 360);
 
-        g.setColor(Cor.PRETO);
-        g.fillRect(0, 0, largura, percDesloc / 2);
-
-        g.setColor(Cor.BRANCO);
-        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_MEDIUM));
-        if (sequencia.length() == 0) {
-            g.drawString("", largura / 2, 2, Graphics.TOP | Graphics.HCENTER);
-        } else {
-            g.drawString("Jogada " + sequencia.length(), largura / 2, 2, Graphics.TOP | Graphics.HCENTER);
-        }
-
         if (curBlock == 1) {
             Musica.tocaNota(Musica.cNat);
         }
@@ -95,6 +84,17 @@ public class NanoGenius extends Canvas implements CommandListener {
 
         g.setColor(curBlock == 5 ? Cor.ROXO : Cor.ROXO_ESCURO);
         g.fillArc((larguraAlt / 3) + percDesloc / 2, (larguraAlt / 3) + percDesloc, larguraAlt / 3, larguraAlt / 3, 0, 360);
+
+        g.setColor(Cor.PRETO);
+        g.fillRect(0, 0, largura, percDesloc / 2);
+
+        g.setColor(Cor.BRANCO);
+        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_MEDIUM));
+        if (sequencia.length() == 0) {
+            g.drawString("", largura / 2, 2, Graphics.TOP | Graphics.HCENTER);
+        } else {
+            g.drawString("Jogada " + sequencia.length(), largura / 2, 2, Graphics.TOP | Graphics.HCENTER);
+        }
     }
 
     private void pausa(int tempo) {
