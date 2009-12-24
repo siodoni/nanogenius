@@ -86,10 +86,10 @@ public class NanoGenius extends Canvas implements CommandListener {
         g.fillArc((larguraAlt / 3) + percDesloc / 2, (larguraAlt / 3) + percDesloc, larguraAlt / 3, larguraAlt / 3, 0, 360);
 
         g.setColor(Cor.PRETO);
-        g.fillRect(0, 0, largura, percDesloc / 2);
+        g.fillRect(0, 0, largura, (int) (percDesloc / 1.3));
 
         g.setColor(Cor.BRANCO);
-        g.setFont(Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL));
+        g.setFont(Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL));
         if (sequencia.length() == 0) {
             g.drawString("", largura / 2, 2, Graphics.TOP | Graphics.HCENTER);
         } else {
