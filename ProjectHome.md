@@ -1,0 +1,1 @@
+Emulador do antigo Genius para celular
